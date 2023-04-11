@@ -1,0 +1,23 @@
+.nav-link:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-radius: 0.25rem;
+}
+
+span {
+    color: #198754;
+    background-color: inherit;
+    font-weight: bold;
+}
+
+td.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+.footer-text{
+    font-family: "Bradley Hand ITC";
+    font-weight: 600;
+    margin: 50px 0;
+    font-size: 24px;
+}
+
