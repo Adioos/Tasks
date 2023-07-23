@@ -1,4 +1,6 @@
 # Tasks
+![Image alt](https://github.com/Adioos/Tasks/blob/e7195b69eb6ee56b9c98ea35ddc51659cc6d3119/main.png)
+
 Проект "Task Manager"
 Task Manager - это веб-приложение для управления задачами. Вы можете создавать, редактировать и удалять задачи, а также устанавливать им дедлайны и статусы.
 Laravel 10
