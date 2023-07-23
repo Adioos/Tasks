@@ -45,4 +45,9 @@ class Task extends Model
     {
         return $this->deadline && $this->deadline < now();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

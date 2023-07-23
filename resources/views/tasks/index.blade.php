@@ -14,8 +14,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="d-flex justify-content-between mb-3 align-items-center">
-                        @if(isset($search))
-                            <h2>Результат поиска: {{ $search }}</h2>
+                        @if (isset($search))
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2>Результат поиска: {{ $search }}</h2>
+                                <a href="{{ route('tasks.index') }}" class="btn btn-info ml">Очистить поиск</a>
+                            </div>
                         @else
                             <h1>Список задач</h1>
                         @endif

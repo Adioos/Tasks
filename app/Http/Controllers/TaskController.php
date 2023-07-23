@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -17,10 +18,12 @@ class TaskController extends Controller
     public function index()
     {
         $search = null;
-
         $status = request('status');
 
-        $tasks = Task::when($status, function ($query) use ($status) {
+        $user = Auth::user(); // Получаем текущего аутентифицированного пользователя
+
+        $tasks = Task::where('user_id', $user->id) // Фильтруем задачи только для текущего пользователя
+        ->when($status, function ($query) use ($status) {
             return $query->where('status', $status);
         })
             ->when(request('deadline'), function ($query) {
@@ -41,8 +44,6 @@ class TaskController extends Controller
 
         return view('tasks.index', compact('tasks', 'search'));
     }
-
-
 
 
     /**
@@ -68,7 +69,9 @@ class TaskController extends Controller
             'description' => 'required',
         ]);
 
-        $task = Task::create([
+        $user = Auth::user(); // Получаем текущего аутентифицированного пользователя
+
+        $task = $user->tasks()->create([ // Создаем задачу, привязанную к текущему пользователю
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
             'status' => $request->status,
@@ -77,7 +80,6 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index', $task->id);
     }
-
 
     /**
      * Display the specified resource.
@@ -144,6 +146,5 @@ class TaskController extends Controller
             ->paginate(9999999999999999);
         return view('tasks.index', compact('tasks', 'search'));
     }
-
 
 }
